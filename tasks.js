@@ -206,45 +206,46 @@ function copyDescription() {
   }
   return input.innerText;
 }
-function pasteMetaDescription(varDescript) {
+function pasteMetaDescription() {
   document.getElementById("wpseo-meta-tab-content").click();
-  setTimeout(() => {document.getElementById('yoast-google-preview-description-metabox').querySelector('span').innerText = varDescript;
-  },1000);
+  document.getElementById('yoast-google-preview-description-metabox').querySelector('span').click();
+  // setTimeout(() => {document.getElementById('yoast-google-preview-description-metabox').querySelector('span').innerText = varDescript;
+  // document.getElementById('yoast-google-preview-description-metabox').querySelector('span').focus();
+  // },1000);
 }
-function socialDescription(varDescript) {
+function socialDescription() {
   document.getElementById("wpseo-meta-tab-social").click();
-  setTimeout(function() {
-    document.getElementById('social-description-input-metabox').querySelector('span').innerText = varDescript;
-    console.log('socialDescription');
-  }, 1000);
+  // setTimeout(function() {
+    document.getElementById('social-description-input-metabox').querySelector('span').click();
+    // document.getElementById('social-description-input-metabox').querySelector('span').innerText = varDescript;
+    // console.log('socialDescription');
+  // }, 10000);
 };
-function twitterDescription(varDescript) {
+function twitterDescription() {
+  document.getElementById("wpseo-meta-tab-social").click();
   document.querySelector('.sc-iMSIvx.ljMQvr button').click();
-  setTimeout(() => {document.getElementById('twitter-description-input-metabox').querySelector('span').innerText = varDescript;
+  // setTimeout(() => {
+    document.getElementById('twitter-description-input-metabox').querySelector('span').click();
   console.log('twitterDescription');
-  }, 1000);
-  document.querySelector('.sc-iMSIvx.ljMQvr button').click();
+  // }, 1000);
 }
-function copyPasteDescription() {
+function cp1() {
   const varDescript = copyDescription();
   console.log(varDescript)
-  pasteMetaDescription(varDescript);
-setTimeout(()  => socialDescription(varDescript), 2000);
-  setTimeout(() => twitterDescription(varDescript), 2000);
+  pasteMetaDescription();
+}
+function cp2() {
+socialDescription();
+setTimeout(() => twitterDescription(), 5000);
 }
 const TitleCopied = ct();
 console.log(TitleCopied);
 
-var f = [// ip,
-  // pasteClick,
+var f = [
   socialImage,
-  // pt,
   twitterImage,
-  copyDescription,
-  // pasteMetaDescription,
-  // socialDescription,
-  // twitterDescription,
-  copyPasteDescription];
+  cp1,
+cp2];
 
 ip()
 setTimeout(() => {window.addEventListener('load', pasteClick(TitleCopied), { once: true });}, 3000);
