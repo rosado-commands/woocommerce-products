@@ -1,17 +1,12 @@
-window.focus();
-const TitleCopied = ct();
-console.log(TitleCopied);
-descriptionEvents();
-img();
+function pauseExecution() {
+  // Pause for 1 second (1000 milliseconds)
+  setTimeout(function() {
+    // Code to execute after the pause
+    console.log("Pause finished. Resuming execution...");
 
-async function img() {
-  await ip();
-  setTimeout(() => {
-    window.addEventListener('load', pasteClick(TitleCopied), { once: true });
-    console.log('timeout for pasteClick');
-  }, 6000);
-
-}
+    // Place any code you want to execute after the pause inside this function
+  }, 1000); // 1000 milliseconds = 1 second
+};
 
 async function writeClipboardText(text) {
   try {
@@ -73,11 +68,11 @@ function ct() {
   // // Copy the text inside the text field
   // Return the value of the input field
   return input.value;
-}
+};
 
-async function ip() {
+function ip() {
   // Select the anchor element using its class name
-  const link = document.querySelector('div.inside p.hide-if-no-js a');
+  var link = document.querySelector('div.inside p.hide-if-no-js a');
 
   // Check if the link exists
   if (link) {
@@ -87,49 +82,46 @@ async function ip() {
   } else {
     console.error('Link not found');
   }
-}
+};
 
-async function pasteVarTitle(varTitle) {
+function pasteVarTitle(varTitle) {
   // Select the input element by its id
-  console.log('pasteVarTitle function called');
   var inputElement = document.getElementById('attachment-details-title');
 
   // Check if the input element exists
   if (inputElement) {
     // Set the value of the input field to varTitle
-    // await setTimeout(async () => { 
     inputElement.value = varTitle;
     console.log('Pasted varTitle');
-    // }, 3000);
   } else {
     console.error('Input element not found');
   }
-}
+};
 
-// function pt(varTitle) {
-//   const pasteInput = document.getElementById('media-search-input');
-//   jQuery("#media-search-input").focus();
-//   navigator.clipboard
-//     .readText()
-//     .then((clipText) => (pasteInput.innerText = clipText));
+function pt(varTitle) {
+  const pasteInput = document.getElementById('media-search-input');
+  jQuery("#media-search-input").focus();
+  navigator.clipboard
+    .readText()
+    .then((clipText) => (pasteInput.innerText = clipText));
 
-//   // Loop through each character in the input string
-//   // for (let i = 0; i < varTitle.length; i++) {
-//   //   // Create a new InputEvent for the current character
-//   //   const event = new InputEvent('input', {
-//   //     inputType: 'insertText',
-//   //     data: varTitle[i],
-//   //     dataTransfer: null,
-//   //     isComposing: false,
-//   //     bubbles: true,
-//   //     cancelable: false,
-//   //     composed: true
-//   //   });
+  // Loop through each character in the input string
+  // for (let i = 0; i < varTitle.length; i++) {
+  //   // Create a new InputEvent for the current character
+  //   const event = new InputEvent('input', {
+  //     inputType: 'insertText',
+  //     data: varTitle[i],
+  //     dataTransfer: null,
+  //     isComposing: false,
+  //     bubbles: true,
+  //     cancelable: false,
+  //     composed: true
+  //   });
 
-//   // Dispatch the event on the input element
-//   // pasteInput.dispatchEvent(event);
+  // Dispatch the event on the input element
+  // pasteInput.dispatchEvent(event);
 
-// }
+};
 // // Loop through each character in the input string
 
 //   // Create a new KeyboardEvent for the current character
@@ -164,67 +156,52 @@ async function pasteVarTitle(varTitle) {
 //   console.error('Input element not found');
 // }
 function buttonClick() {
-  console.log('set product image button click')
   document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector('button.media-button.button-primary.button-large.media-button-select').click()
-}
-// setTimeout(() => clickExit(), 1000);
-// document.querySelectorAll('div[id*="__wp-uploader"][style="position: relative;"]')[0].querySelector('button.media-button.button-primary.button-large.media-button-select').click()
-// document.querySelector('div[id="__wp-uploader-id-3"]').querySelectorAll('button.media-button.button-primary.button-large.media-button-select')[0].click()
-// document.querySelector("[id^=__wp-uploader-id-]").querySelector('button.media-button.button-primary.button-large.media-button-select').click() 
+  // setTimeout(() => clickExit(), 1000);
+  // document.querySelectorAll('div[id*="__wp-uploader"][style="position: relative;"]')[0].querySelector('button.media-button.button-primary.button-large.media-button-select').click()
+  // document.querySelector('div[id="__wp-uploader-id-3"]').querySelectorAll('button.media-button.button-primary.button-large.media-button-select')[0].click()
+  // document.querySelector("[id^=__wp-uploader-id-]").querySelector('button.media-button.button-primary.button-large.media-button-select').click() 
+  console.log('click')
+};
 function clickExit() {
   document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector('button.media-modal-close').click();
   console.log('exit');
 }
-async function pasteClick(varTitle) {
-  // event listener on media button
-  document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])')
-    .querySelector('button.media-button.button-primary.button-large.media-button-select')
-    .addEventListener('click', (event) => {
-      console.log('buttonClick, calling si-function');
-      si();
-    }, { once: true }
-    );
+function pasteClick(varTitle) {
   // setTimeout(clickExit(), 3000);
-  await pasteVarTitle(varTitle);
-  buttonClick();
-  console.log('exiting pasteClick function');
+  setTimeout(() => pasteVarTitle(varTitle), 2000);
+  setTimeout(() =>  {
+  document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector('button.media-button.button-primary.button-large.media-button-select').addEventListener('click', (event) => si(), { once: true });
+  buttonClick();}, 1000);
+  setTimeout(() => document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector('button.media-button.button-primary.button-large.media-button-select').addEventListener('click', (event) => twitterImage(), {once: true}), 3000);
 }
 function si() {
   // function socialImage() {
-  // develop click function on id="media-search-input" 
+
+  //develop click function on id="media-search-input" 
   // click function on div.thumbnail"
   // #__attachments-view-607 > li:nth-child(1) > div:nth-child(1) > div:nth-child(1)
   // document.querySelectorAl('li.attachment.save-ready').click()
   // document.getElementById('__wp-uploader-id-3').querySelector('li.attachment.save-ready').click()  
-  // title = ct();
 
+  title = ct();
   document.getElementById("wpseo-meta-tab-social").click();
-  console.log('social tab click');
-  setTimeout(() => {
-    document.getElementById("social-select-button-metabox").click();
-    console.log('social image click');
+  console.log('socialImage')
+  setTimeout(function() {
+    document.getElementById("social-select-button-metabox").focus();
+    console.log('click image');
   }, 1000);
-  setTimeout(() => {
-    document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("#media-search-input").focus();
-    console.log('click media search');
-    document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("#media-search-input").focus();
-    // event listener on select button to open twitter image
-    document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("button.media-button.button-primary.button-large.media-button-select").addEventListener('click', (event) => {
-      console.log('click on media select button calling twitter');
-      twitterImage();
-    }, { once: true });
-  }, 5000);
-}
+  // document.getElementById('__wp-uploader-id-3').querySelector('button.button.media-button.button-primary.button-large.media-button-select').addEventListener('click', function () {
+  // twitterImage();
+  // }, {once: true})
+};
 function twitterImage() {
-  // title = ct();
-  // document.getElementById("wpseo-meta-tab-social").click();
+  title = ct();
+  document.getElementById("wpseo-meta-tab-social").click();
   document.querySelector('.sc-iMSIvx.ljMQvr button').click();
-  setTimeout(() => {
-    document.getElementById("twitter-select-button-metabox").click();
-    console.log('click tiwitter image');
-  }, 1000);
-  setTimeout(() => document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("#media-search-input").focus(), 5000);
-
+  setTimeout(() => { document.getElementById("twitter-select-button-metabox").click() }, 1000);
+  console.log('click tiwitter image');
+  // document.querySelector('.sc-iMSIvx.ljMQvr button').click();
 }
 function copyDescription() {
   const iframe = document.getElementById("content_ifr");
@@ -258,6 +235,7 @@ function pasteMetaDescription() {
 } // setTimeout(() => {document.getElementById('yoast-google-preview-description-metabox').querySelector('span').innerText = varDescript;
 // document.getElementById('yoast-google-preview-description-metabox').querySelector('span').focus();
 // },1000);
+
 function socialDescription() {
   document.getElementById("wpseo-meta-tab-social").click();
   // setTimeout(function() {
@@ -269,7 +247,7 @@ function socialDescription() {
   // document.getElementById('social-description-input-metabox').querySelector('span').innerText = varDescript;
   // console.log('socialDescription');
   // }, 10000);
-}
+};
 function twitterDescription() {
   document.getElementById("wpseo-meta-tab-social").click();
   document.querySelector('.sc-iMSIvx.ljMQvr button').click();
@@ -290,59 +268,45 @@ function twitterDescription() {
 // }
 // function jumpSocial() {
 // }
-async function descriptionEvents() {
+function descriptionEvents() {
   const iframe = document.getElementById("content_ifr");
   const input = iframe.contentWindow.document.documentElement;
   // document.getElementById("content_ifr").contentWindow.document.documentElement;
-  input.addEventListener('cut', function() {
-    // const selection = document.getSelection(event);
-    // event.clipboardData.setData("text/plain", selection.toString());
-    // event.preventDefault();
-    window.focus();
-    let materialList = function () { navigator.clipboard.readText()
-      .then(clipText => {
-        console.log(clipText);
-      })
-      .catch(err => {
-        console.error('Failed to read clipboard contents: ', err);
-      })}
-    console.log('MaterialList: ', materialList());
-    CustomTabs(materialList);
-  });
-}
-
-
-// copy the first lines to copy to meta and social
-// input.addEventListener('copy', function() {
-//   pasteMetaDescription();
-//   console.log('copied')
-// }
-// );
-
-
-async function CustomTabs(materialList) {
-  console.log('CustonTabs');
-  console.log('MaterialList: ', materialList);
-  async function createSavedTab() {
-    document.querySelector('li.yikes_wc_product_tabs_tab a').click();
-    document.getElementById("_yikes_wc_apply_a_saved_tab").click();
-    await setTimeout(() => {
-      document.getElementById('saved_tab_container_1').querySelector('span.yikes_woo_saved_tab_selector_lity.dashicons.dashicons-plus-alt').click();
-    }, 4000);
+  input.addEventListener('cut', () => {
+    // navigator.clipboard
+    // .readText()
+    // .then((clipText) => {
+    // const tabsCuted = clipText;
+    CustomTabs();
+    // }
+    // );
   }
-  await createSavedTab();
-  console.log('Saved tab created');
-  setTimeout(function(materialList) {
-    document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.focus();
-    document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.document.documentElement.querySelector('p').textContent = materialList;
-  }, 10000);
-  document.getElementById('yikes_woo_save_custom_tabs').addEventListener('click', function() {
-    writeClipboardText(document.URL);
-    setTimeout(() => document.getElementById('publish').click(), 4000);
-  })
+  );
+  // copy the first lines to copy to meta and social
+  input.addEventListener('copy', function() {
+    pasteMetaDescription();
+    console.log('copied')
+  }
+  );
 }
-// setTimeout((tabsCuted) => {
-//   document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.document.documentElement.innerText = tabsCuted;
-// }, 6000);
-// querySelector('p.yikes-custom-woo-tab-title yikes-custom-woo-tab-title-additional-information').innerText();  
 
+function CustomTabs() {
+  document.querySelector('li.yikes_wc_product_tabs_tab a').click()
+  document.getElementById("_yikes_wc_apply_a_saved_tab").click();
+  setTimeout(() => {
+    document.getElementById('saved_tab_container_1').querySelector('span.yikes_woo_saved_tab_selector_lity.dashicons.dashicons-plus-alt').click();
+  }, 6000);
+  // setTimeout((tabsCuted) => {
+  //   document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.document.documentElement.innerText = tabsCuted;
+  // }, 6000);
+  // querySelector('p.yikes-custom-woo-tab-title yikes-custom-woo-tab-title-additional-information').innerText();  
+}
+
+const TitleCopied = ct();
+console.log(TitleCopied);
+descriptionEvents();
+
+ip()
+setTimeout(() => { window.addEventListener('load', pasteClick(TitleCopied), { once: true }); }, 3000);
+// socialImage();
+//   twitterImage,
