@@ -3,7 +3,7 @@ if (published != "Published ") {
   alert('O produto não está publicado, pois seu status é: ' + published);
 } else {
   console.log(published);
-  window.focus();
+  // window.focus();
   const TitleCopied = ct();
   console.log(TitleCopied);
   descriptionEvents();
