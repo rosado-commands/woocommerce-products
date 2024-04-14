@@ -1,16 +1,27 @@
-window.focus();
-const TitleCopied = ct();
-console.log(TitleCopied);
-descriptionEvents();
-img();
+const published = document.getElementById("post-status-display").innerText;
+if (published != "Published ") {
+  alert('O produto não está publicado, pois seu status é: ' + published);
+} else {
+  console.log(published);
+  window.focus();
+  const TitleCopied = ct();
+  console.log(TitleCopied);
+  descriptionEvents();
+  img(TitleCopied);
+}
 
-async function img() {
+async function img(TitleCopied) {
   await ip();
   setTimeout(() => {
     window.addEventListener('load', pasteClick(TitleCopied), { once: true });
     console.log('timeout for pasteClick');
   }, 6000);
 
+}
+
+async function paste(input) {
+  const text = await navigator.clipboard.readText();
+  input.value = text;
 }
 
 async function writeClipboardText(text) {
@@ -205,25 +216,36 @@ function si() {
     console.log('social image click');
   }, 1000);
   setTimeout(() => {
+    console.log('click media search')
+    document.execCommand('paste');
     document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("#media-search-input").focus();
-    console.log('click media search');
-    document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("#media-search-input").focus();
-    // event listener on select button to open twitter image
-    document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("button.media-button.button-primary.button-large.media-button-select").addEventListener('click', (event) => {
+    // event listener autoclick on Select button after picture choice
+    jQuery('.attachments-wrapper').on('click', () => {
+      console.log('picture Select Button clicked');
+      jQuery('.button.media-button.button-primary.button-large.media-button-select').click();
       console.log('click on media select button calling twitter');
-      twitterImage();
-    }, { once: true });
+      setTimeout(() => twitterImage(), 1000);
+    });
+    // event listener on select button to open twitter image
+    // document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("button.media-button.button-primary.button-large.media-button-select").addEventListener('click', (event) => {
+    // }, { once: true });
   }, 5000);
 }
 function twitterImage() {
-  // title = ct();
-  // document.getElementById("wpseo-meta-tab-social").click();
   document.querySelector('.sc-iMSIvx.ljMQvr button').click();
   setTimeout(() => {
     document.getElementById("twitter-select-button-metabox").click();
     console.log('click tiwitter image');
   }, 1000);
-  setTimeout(() => document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])').querySelector("#media-search-input").focus(), 5000);
+  setTimeout(() => {
+    const actualPage = document.querySelector('div[id*="__wp-uploader"][style="position: relative;"]:not([aria-hidden="true"])');
+    actualPage.querySelector("#media-search-input").focus();
+    // event listener autoclick on Select button after picture choice
+    actualPage.querySelector('.attachments-wrapper').addEventListener('click', () => {
+      console.log('picture Select Button clicked');
+      actualPage.querySelector('.button.media-button.button-primary.button-large.media-button-select').click();
+    });
+  }, 2000);
 
 }
 function copyDescription() {
@@ -299,15 +321,17 @@ async function descriptionEvents() {
     // event.clipboardData.setData("text/plain", selection.toString());
     // event.preventDefault();
     window.focus();
-    let materialList = function () { navigator.clipboard.readText()
-      .then(clipText => {
-        console.log(clipText);
-      })
-      .catch(err => {
-        console.error('Failed to read clipboard contents: ', err);
-      })}
-    console.log('MaterialList: ', materialList());
-    CustomTabs(materialList);
+    // let materialList = function() {
+    //   navigator.clipboard.readText()
+    //     .then(clipText => {
+    //       console.log(clipText);
+    //     })
+    //     .catch(err => {
+    //       console.error('Failed to read clipboard contents: ', err);
+    //     })
+    // }
+    // console.log('MaterialList: ', materialList());
+    CustomTabs();
   });
 }
 
@@ -320,25 +344,31 @@ async function descriptionEvents() {
 // );
 
 
-async function CustomTabs(materialList) {
+async function CustomTabs() {
   console.log('CustonTabs');
-  console.log('MaterialList: ', materialList);
   async function createSavedTab() {
     document.querySelector('li.yikes_wc_product_tabs_tab a').click();
     document.getElementById("_yikes_wc_apply_a_saved_tab").click();
-    await setTimeout(() => {
+    setTimeout(() => {
       document.getElementById('saved_tab_container_1').querySelector('span.yikes_woo_saved_tab_selector_lity.dashicons.dashicons-plus-alt').click();
     }, 4000);
   }
   await createSavedTab();
   console.log('Saved tab created');
-  setTimeout(function(materialList) {
+  setTimeout(function() {
+    window.scroll({
+      top: 3000,
+      left: 0,
+      behavior: "instant",
+    });
     document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.focus();
-    document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.document.documentElement.querySelector('p').textContent = materialList;
+    document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.document.documentElement.querySelector('p').textContent = '';
+    document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.document.execCommand('paste');
+    paste(document.getElementById('_yikes_wc_custom_repeatable_product_tabs_tab_content_1_ifr').contentWindow.document.documentElement.querySelector('p').textContent);
   }, 10000);
   document.getElementById('yikes_woo_save_custom_tabs').addEventListener('click', function() {
     writeClipboardText(document.URL);
-    setTimeout(() => document.getElementById('publish').click(), 4000);
+    setTimeout(() => document.getElementById('publish').click(), 3000);
   })
 }
 // setTimeout((tabsCuted) => {
